@@ -1,0 +1,173 @@
+/**
+ * Projeto 2
+ * Integrantes:
+ * Gabriel Ferreira - RA: 10442043
+ * Gian Lucca Campanha Ribeiro - RA: 10438361
+ * Kaiki Bellini Barbosa - RA: 10402509
+ */
+
+package com.mackenzie;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import com.mackenzie.model.Document;
+import com.mackenzie.model.AVLTree;
+import com.mackenzie.model.Result;
+import com.mackenzie.model.HashTable;
+import com.mackenzie.controller.SearchController;
+import com.mackenzie.view.SearchView;
+
+public class Main {
+
+    private static final String LOG_FILENAME = "resultado.txt";
+    private static final String SIMILARITY_METRIC = "Cosseno";
+    private static final HashTable.HashMode HASH_MODE = HashTable.HashMode.HASH_JAVA_DEFAULT;
+
+    public static void main(String[] args) {
+
+        if (args.length < 3) {
+            new SearchView(null).displayUsage();
+            return;
+        }
+
+        String directory = args[0];
+        double threshold;
+        String mode = args[2];
+
+        try {
+            threshold = Double.parseDouble(args[1]);
+        } catch (NumberFormatException e) {
+            System.err.println("Erro: O limiar de similaridade deve ser um número entre 0 e 1.");
+            return;
+        }
+
+        // Leitura e processamento de documentos.
+        List<Document> documents = new ArrayList<>();
+        File folder = new File(directory);
+
+        if (!folder.isDirectory() || folder.listFiles() == null) {
+            System.err.println("Erro: O caminho especificado não é um diretório válido ou está vazio.");
+            return;
+        }
+
+        for (File file : folder.listFiles()) {
+            if (file.isFile()) {
+                Document doc = new Document(file.getPath(), HASH_MODE);
+                doc.process();
+                documents.add(doc);
+            }
+        }
+
+        if (documents.size() < 2 && !mode.equalsIgnoreCase("busca")) {
+            System.out.println("É necessário pelo menos dois documentos para realizar comparações.");
+            return;
+        }
+
+        //Cálculo de similaridade e construção da AVL.
+        AVLTree avl = new AVLTree();
+        DocumentComparator comparator = new DocumentComparator(SIMILARITY_METRIC);
+        int totalPairs = 0;
+
+        long startTime = System.nanoTime();
+
+        // O cálculo e a inserção na AVL só são feitos se o modo não for "busca" de arquivos inexistentes
+        if (!mode.equalsIgnoreCase("busca") || documents.size() >= 2) {
+            for (int i = 0; i < documents.size(); i++) {
+                for (int j = i + 1; j < documents.size(); j++) {
+                    Document a = documents.get(i);
+                    Document b = documents.get(j);
+
+                    double similarity = comparator.calculateSimilarity(a, b);
+                    Result r = new Result(a.getName(), b.getName(), similarity);
+                    avl.insert(similarity, r);
+                    totalPairs++;
+                }
+            }
+        }
+
+        long endTime = System.nanoTime();
+        double durationInSeconds = (endTime - startTime) / 1_000_000_000.0;
+
+        //Execução dos modos de consulta.
+
+        SearchController controller = new SearchController(
+                avl, documents, comparator, HASH_MODE.name(), SIMILARITY_METRIC
+        );
+        SearchView view = new SearchView(controller);
+
+        String outputContent = "";
+        List<Result> modeResults;
+
+        view.displayHeader();
+        System.out.println(String.format("(Tempo de construção da AVL: %.4f segundos)", durationInSeconds));
+
+        switch (mode.toLowerCase()) {
+            case "lista":
+                //Corresponde ao comando java Main <dir> <limiar> lista
+                modeResults = controller.getResultsAboveThreshold(threshold);
+                outputContent = controller.generateReport(mode, threshold, modeResults, totalPairs);
+                break;
+
+            case "topk":
+                //Corresponde ao comando java Main <dir> <limiar> topK <K>
+                if (args.length < 4) {
+                    view.displayError("Modo 'topK' requer o valor de K (ex: topK 5).");
+                    return;
+                }
+                try {
+                    int k = Integer.parseInt(args[3]);
+                    modeResults = controller.getTopKResults(k);
+                    outputContent = controller.generateReport(mode, 0.0, modeResults, totalPairs);
+                } catch (NumberFormatException e) {
+                    view.displayError("O valor de K deve ser um número inteiro.");
+                    return;
+                }
+                break;
+
+            case "busca":
+                //Corresponde ao comando java Main <dir> <limiar> busca <doc1> <doc2>
+                if (args.length < 5) {
+                    view.displayError("Modo 'busca' requer dois nomes de arquivo (ex: busca doc1.txt doc4.txt).");
+                    return;
+                }
+                String doc1 = args[3];
+                String doc2 = args[4];
+
+                Result singleResult = controller.compareSpecificDocuments(doc1, doc2);
+                if (singleResult != null) {
+                    view.displaySingleComparison(singleResult, SIMILARITY_METRIC);
+                    //O modo 'busca' não gera o relatório completo, apenas a saída direta
+                    return;
+                } else {
+                    view.displayError(String.format("Os documentos '%s' ou '%s' não foram encontrados.", doc1, doc2));
+                    return;
+                }
+
+            default:
+                view.displayError("Modo de execução inválido: " + mode);
+                view.displayUsage();
+                return;
+        }
+
+        //Saída padrão e gravação em arquivo.
+        if (!outputContent.isEmpty()) {
+            view.displayReport(outputContent);
+            saveLogFile(outputContent);
+        }
+    }
+
+    /**
+     * Grava a saída em um arquivo de log (resultado.txt).
+     */
+    private static void saveLogFile(String content) {
+        try (FileWriter writer = new FileWriter(LOG_FILENAME)) {
+            writer.write(content);
+            System.out.println("\n(Saída salva em: " + LOG_FILENAME + ")");
+        } catch (IOException e) {
+            System.err.println("Erro ao gravar o arquivo de log: " + e.getMessage());
+        }
+    }
+}

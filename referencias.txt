@@ -1,4 +1,15 @@
 lista de stop words:
-
 https://gemini.google.com/app/190ba45a79711a11
 
+como implementar hash table:
+https://gemini.google.com/app/531806c8f3762814
+https://chatgpt.com/c/69277b2b-f438-8326-9389-2bd5d318773d
+
+como implementar a avl:
+https://gemini.google.com/app/d09eac0c6b3746b8
+
+como montar os testes:
+https://chatgpt.com/c/69279c25-1a50-8331-bf9c-52c4ef7fa0f1
+
+geração de textos para analise de similaridade:
+https://gemini.google.com/app/b690a07d2a790177

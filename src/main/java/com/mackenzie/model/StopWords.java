@@ -1,3 +1,11 @@
+/**
+ * Projeto 2
+ * Integrantes:
+ * Gabriel Ferreira - RA: 10442043
+ * Gian Lucca Campanha Ribeiro - RA: 10438361
+ * Kaiki Bellini Barbosa - RA: 10402509
+ */
+
 package com.mackenzie.model;
 
 public class StopWords {
