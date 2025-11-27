@@ -1,0 +1,51 @@
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Total de documentos processados: 10
+Total de pares comparados: 45
+Função hash utilizada: HASH_JAVA_DEFAULT
+Métrica de similaridade: Cosseno
+Pares com menor similaridade:
+documento_05.txt <-> documento_09.txt = 0.0000
+
+Estatísticas de Rotação:
+  LL Rotations: 3
+  RR Rotations: 6
+  LR Rotations: 0
+  RL Rotations: 4
+  Total Rotations: 13
+
+=== INÍCIO: TESTE 2: MODO TOP K (K=3) ===
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0045 segundos)
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Total de documentos processados: 10
+Total de pares comparados: 45
+Função hash utilizada: HASH_JAVA_DEFAULT
+Métrica de similaridade: Cosseno
+Pares com menor similaridade:
+documento_05.txt <-> documento_09.txt = 0.0000
+
+Estatísticas de Rotação:
+  LL Rotations: 3
+  RR Rotations: 6
+  LR Rotations: 0
+  RL Rotations: 4
+  Total Rotations: 13
+
+(Saída salva em: resultado.txt)
+=== FIM: TESTE 2: MODO TOP K (K=3) (Tempo: 89ms) ===
+
+
+=== INÍCIO: TESTE 3: MODO BUSCA (documento_01.txt vs documento_05.txt) ===
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0053 segundos)
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Comparando: documento_01.txt <-> documento_05.txt
+Similaridade calculada: 0.20
+Métrica utilizada: Cosseno
+=== FIM: TESTE 3: MODO BUSCA (documento_01.txt vs documento_05.txt) (Tempo: 97ms) ===
