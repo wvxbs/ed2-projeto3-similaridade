@@ -1,0 +1,1 @@
+O Processamento de Linguagem Natural (NLP) é um ramo importante da IA. Ele permite que as máquinas compreendam, interpretem e gerem a linguagem humana. Isso é essencial para chatbots e sistemas de tradução automática.

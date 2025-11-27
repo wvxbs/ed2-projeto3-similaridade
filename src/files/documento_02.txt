@@ -1,0 +1,1 @@
+Inteligência Artificial (IA) e Aprendizado de Máquina (Machine Learning) são conceitos interligados. A IA busca simular a cognição humana, enquanto o Machine Learning utiliza algoritmos e dados para permitir que os sistemas aprendam sem serem explicitamente programados. Redes Neurais e Deep Learning são técnicas avançadas de ML que impulsionaram o crescimento recente da IA.
