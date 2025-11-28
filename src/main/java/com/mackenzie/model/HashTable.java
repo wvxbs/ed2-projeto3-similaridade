@@ -63,7 +63,7 @@ public class HashTable {
      * Lógica principal de dispersão: delega para a função hash selecionada no modo.
      */
     private int hash(String key) {
-        if (mode == HashMode.HASH_JAVA_DEFAULT) {
+        if (mode == HashMode.HASH_SIMPLE_ADDITION) {
             return hashSimpleAddition(key);
         }
         return hashJavaDefault(key);

@@ -1,62 +1,111 @@
-=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
-Total de documentos processados: 10
-Total de pares comparados: 45
-Função hash utilizada: HASH_JAVA_DEFAULT
-Métrica de similaridade: Cosseno
-Pares com menor similaridade:
-t1_base.txt <-> t2_plagio.txt = 0.0000
 
-Estatísticas de Rotação:
-  LL Rotations: 0
-  RR Rotations: 1
-  LR Rotations: 0
-  RL Rotations: 1
-  Total Rotations: 2
 
-=== ESTATÍSTICAS DA TABELA HASH ===
-  Função Hash: HASH_JAVA_DEFAULT
-  Tamanho do Array (Buckets): 1024
-  Vocabulário Total (Elementos): 19
-  Buckets Ocupados: 19
-  Fator de Carga (Load Factor): 0.0186 (Elementos/Buckets Totais)
-  Comprimento Máximo da Cadeia (Pior Colisão): 1
-  Comprimento Médio da Cadeia (Média por Bucket Ocupado): 1.00
 
-=== INÍCIO: TESTE 9: MODO TOP K (Diretório de Borda - Top 3) ===
-COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 topK 3
+=== INÍCIO: TESTE 1: BORDA - Identidade (1.0) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t1_base.txt t1_igual.txt
 DIRETÓRIO BASE: .
 STATUS SHELL: 0
 =================================
    VERIFICADOR DE SIMILARIDADE
 =================================
 
-(Tempo de construção da AVL: 0.0035 segundos)
-=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
-Total de documentos processados: 10
-Total de pares comparados: 45
-Função hash utilizada: HASH_JAVA_DEFAULT
-Métrica de similaridade: Cosseno
-Pares com menor similaridade:
-t1_base.txt <-> t2_plagio.txt = 0.0000
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't1_base.txt' ou 't1_igual.txt' não foram encontrados.
+=== FIM: TESTE 1: BORDA - Identidade (1.0) (Status: ✅ OK | Tempo: 123ms) ===
 
-Estatísticas de Rotação:
-  LL Rotations: 0
-  RR Rotations: 1
-  LR Rotations: 0
-  RL Rotations: 1
-  Total Rotations: 2
 
-=== ESTATÍSTICAS DA TABELA HASH ===
-  Função Hash: HASH_JAVA_DEFAULT
-  Tamanho do Array (Buckets): 1024
-  Vocabulário Total (Elementos): 19
-  Buckets Ocupados: 19
-  Fator de Carga (Load Factor): 0.0186 (Elementos/Buckets Totais)
-  Comprimento Máximo da Cadeia (Pior Colisão): 1
-  Comprimento Médio da Cadeia (Média por Bucket Ocupado): 1.00
+=== INÍCIO: TESTE 2: BORDA - Reordenamento (1.0) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t1_base.txt t1_reordenado.txt
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
 
-(Saída salva em: resultado.txt)
-=== FIM: TESTE 9: MODO TOP K (Diretório de Borda - Top 3) (Status: ✅ OK | Tempo: 83ms) ===
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't1_base.txt' ou 't1_reordenado.txt' não foram encontrados.
+=== FIM: TESTE 2: BORDA - Reordenamento (1.0) (Status: ✅ OK | Tempo: 112ms) ===
+
+
+=== INÍCIO: TESTE 3: BORDA - Vocabulário Zero (0.0) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t1_base.txt t1_diferente.txt
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't1_base.txt' ou 't1_diferente.txt' não foram encontrados.
+=== FIM: TESTE 3: BORDA - Vocabulário Zero (0.0) (Status: ✅ OK | Tempo: 120ms) ===
+
+
+=== INÍCIO: TESTE 4: BORDA - Plágio (Alta) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t2_origem.txt t2_plagio.txt
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't2_origem.txt' ou 't2_plagio.txt' não foram encontrados.
+=== FIM: TESTE 4: BORDA - Plágio (Alta) (Status: ✅ OK | Tempo: 107ms) ===
+
+
+=== INÍCIO: TESTE 5: BORDA - Tópico Diferente (Baixa) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t2_origem.txt t2_topico_diferente.txt
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't2_origem.txt' ou 't2_topico_diferente.txt' não foram encontrados.
+=== FIM: TESTE 5: BORDA - Tópico Diferente (Baixa) (Status: ✅ OK | Tempo: 105ms) ===
+
+
+=== INÍCIO: TESTE 6: BORDA - Vazio vs. Normal (0.0) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t3_vazio.txt t1_base.txt
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't3_vazio.txt' ou 't1_base.txt' não foram encontrados.
+=== FIM: TESTE 6: BORDA - Vazio vs. Normal (0.0) (Status: ✅ OK | Tempo: 109ms) ===
+
+
+=== INÍCIO: TESTE 7: BORDA - Só Stop Words (0.0) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 busca t3_so_stopwords.txt t1_base.txt
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+=================================
+   VERIFICADOR DE SIMILARIDADE
+=================================
+
+(Tempo de construção da AVL: 0.0000 segundos)
+✗ Error: Os documentos 't3_so_stopwords.txt' ou 't1_base.txt' não foram encontrados.
+=== FIM: TESTE 7: BORDA - Só Stop Words (0.0) (Status: ✅ OK | Tempo: 122ms) ===
+
+
+=== INÍCIO: TESTE 8: MODO LISTA (Diretório de Borda) ===
+COMANDO: java -cp . com.mackenzie.Main "$TEST_DIR" 0.0 lista
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+É necessário pelo menos dois documentos para realizar comparações.
+=== FIM: TESTE 8: MODO LISTA (Diretório de Borda) (Status: ✅ OK | Tempo: 59ms) ===
+
+
+=== INÍCIO: TESTE 9: MODO TOP K (Diretório de Borda - Top 3) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 topK 3
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
+É necessário pelo menos dois documentos para realizar comparações.
+=== FIM: TESTE 9: MODO TOP K (Diretório de Borda - Top 3) (Status: ✅ OK | Tempo: 56ms) ===
 
 
 ========================================================
@@ -64,14 +113,14 @@ Estatísticas de Rotação:
 ========================================================
 STATUS | TESTE | TEMPO
 --------------------------------------------------------
-✅ OK | TESTE 1: BORDA - Identidade (1.0) | 89ms
-✅ OK | TESTE 2: BORDA - Reordenamento (1.0) | 92ms
-✅ OK | TESTE 3: BORDA - Vocabulário Zero (0.0) | 90ms
-✅ OK | TESTE 4: BORDA - Plágio (Alta) | 89ms
-✅ OK | TESTE 5: BORDA - Tópico Diferente (Baixa) | 92ms
-✅ OK | TESTE 6: BORDA - Vazio vs. Normal (0.0) | 94ms
-✅ OK | TESTE 7: BORDA - Só Stop Words (0.0) | 96ms
-✅ OK | TESTE 8: MODO LISTA (Diretório de Borda) | 98ms
-✅ OK | TESTE 9: MODO TOP K (Diretório de Borda - Top 3) | 83ms
+✅ OK | TESTE 1: BORDA - Identidade (1.0) | 123ms
+✅ OK | TESTE 2: BORDA - Reordenamento (1.0) | 112ms
+✅ OK | TESTE 3: BORDA - Vocabulário Zero (0.0) | 120ms
+✅ OK | TESTE 4: BORDA - Plágio (Alta) | 107ms
+✅ OK | TESTE 5: BORDA - Tópico Diferente (Baixa) | 105ms
+✅ OK | TESTE 6: BORDA - Vazio vs. Normal (0.0) | 109ms
+✅ OK | TESTE 7: BORDA - Só Stop Words (0.0) | 122ms
+✅ OK | TESTE 8: MODO LISTA (Diretório de Borda) | 59ms
+✅ OK | TESTE 9: MODO TOP K (Diretório de Borda - Top 3) | 56ms
 
 ========================================================

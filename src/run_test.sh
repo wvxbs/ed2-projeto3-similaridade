@@ -1,4 +1,3 @@
-#!/bin/bash
 ROOT="/home/wvxbs/Documentos/repos/ed2-projeto3-similaridade"
 SRC_MAIN="$ROOT/src/main/java"
 SRC_FILES="$ROOT/src/files"

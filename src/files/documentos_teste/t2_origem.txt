@@ -1,1 +1,0 @@
-A linguagem Java é orientada a objetos e foi projetada para ter o menor número possível de dependências de implementação. Sua intenção é permitir que os desenvolvedores de aplicações escrevam uma vez e executem em qualquer lugar.
