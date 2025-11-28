@@ -83,6 +83,8 @@ public class SearchController {
     public String generateReport(String mode, double threshold, List<Result> modeResults, int totalPairs) {
         StringBuilder sb = new StringBuilder();
 
+        Document sampleDoc = documents.get(0);
+
         sb.append("=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===\n");
         sb.append(String.format("Total de documentos processados: %d\n", documents.size()));
         sb.append(String.format("Total de pares comparados: %d\n", totalPairs));
@@ -108,6 +110,8 @@ public class SearchController {
 
         // Inclui estatísticas de rotação para o relatório
         sb.append("\n").append(avlTree.getRotationStatistics());
+
+        sb.append(sampleDoc.getTable().getStatistics());
 
         return sb.toString();
     }

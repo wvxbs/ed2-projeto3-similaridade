@@ -1,0 +1,23 @@
+=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
+Total de documentos processados: 10
+Total de pares comparados: 45
+Função hash utilizada: HASH_JAVA_DEFAULT
+Métrica de similaridade: Cosseno
+Pares com menor similaridade:
+documento_04.txt <-> documento_09.txt = 0.0000
+
+Estatísticas de Rotação:
+  LL Rotations: 7
+  RR Rotations: 4
+  LR Rotations: 3
+  RL Rotations: 4
+  Total Rotations: 18
+
+=== ESTATÍSTICAS DA TABELA HASH ===
+  Função Hash: HASH_JAVA_DEFAULT
+  Tamanho do Array (Buckets): 1024
+  Vocabulário Total (Elementos): 361
+  Buckets Ocupados: 273
+  Fator de Carga (Load Factor): 0.3525 (Elementos/Buckets Totais)
+  Comprimento Máximo da Cadeia (Pior Colisão): 5
+  Comprimento Médio da Cadeia (Média por Bucket Ocupado): 1.32

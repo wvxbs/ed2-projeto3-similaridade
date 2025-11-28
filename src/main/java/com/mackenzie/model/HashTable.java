@@ -63,7 +63,7 @@ public class HashTable {
      * Lógica principal de dispersão: delega para a função hash selecionada no modo.
      */
     private int hash(String key) {
-        if (mode == HashMode.HASH_SIMPLE_ADDITION) {
+        if (mode == HashMode.HASH_JAVA_DEFAULT) {
             return hashSimpleAddition(key);
         }
         return hashJavaDefault(key);
@@ -204,6 +204,45 @@ public class HashTable {
         return words;
     }
 
+    /**
+     * Retorna uma string formatada com estatísticas de distribuição de colisões,
+     * incluindo o tamanho do array, buckets ocupados, e o comprimento máximo da cadeia.
+     */
+    public String getStatistics() {
+        int[] distribution = getCollisionDistribution();
+        int occupiedBuckets = 0;
+        int maxChainLength = 0;
+        long totalElements = this.size; // Total de palavras únicas
+
+        //Calcula o número de buckets ocupados e o comprimento máximo da cadeia
+        for (int count : distribution) {
+            if (count > 0) {
+                occupiedBuckets++;
+            }
+            if (count > maxChainLength) {
+                maxChainLength = count;
+            }
+        }
+
+        //Calcula o comprimento médio
+        //Usa occupiedBuckets no denominador para medir a média real por lista criada
+        double avgChainLength = (occupiedBuckets == 0) ? 0.0 : (double) totalElements / occupiedBuckets;
+
+        //Calcula o Load Factor
+        double loadFactor = (double) totalElements / table.length;
+
+        return String.format("\n\n=== ESTATÍSTICAS DA TABELA HASH ===\n" +
+                        "  Função Hash: %s\n" +
+                        "  Tamanho do Array (Buckets): %d\n" +
+                        "  Vocabulário Total (Elementos): %d\n" +
+                        "  Buckets Ocupados: %d\n" +
+                        "  Fator de Carga (Load Factor): %.4f (Elementos/Buckets Totais)\n" +
+                        "  Comprimento Máximo da Cadeia (Pior Colisão): %d\n" +
+                        "  Comprimento Médio da Cadeia (Média por Bucket Ocupado): %.2f",
+                this.mode.name(), table.length, totalElements, occupiedBuckets,
+                loadFactor, maxChainLength, avgChainLength);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -226,16 +265,5 @@ public class HashTable {
         }
 
         return sb.toString();
-    }
-
-    private static class Entry {
-        String key;
-        Word word;
-        Entry next;
-
-        Entry(String k, Word w) {
-            key = k;
-            word = w;
-        }
     }
 }

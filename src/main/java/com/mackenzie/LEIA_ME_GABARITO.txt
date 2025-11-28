@@ -1,0 +1,10 @@
+=== GABARITO E GUIA DE TESTES ===
+Nota: Os valores exatos podem variar conforme a métrica (Cosseno, Jaccard) e o pré-processamento.
+
+1. t1_base.txt <-> t1_igual.txt -> Similaridade 1.0 (100%)
+2. t1_base.txt <-> t1_reordenado.txt -> Similaridade 1.0 (Bag-of-words ignora ordem)
+3. t1_base.txt <-> t1_diferente.txt -> Similaridade 0.0
+4. t2_origem.txt <-> t2_plagio.txt -> Alta (geralmente > 0.6 ou 0.7)
+5. t2_origem.txt <-> t2_topico_diferente.txt -> Baixa (geralmente < 0.3)
+6. t3_vazio.txt <-> t1_base.txt -> Similaridade 0.0 (Divisão por zero tratada)
+7. t3_so_stopwords.txt <-> t1_base.txt -> Similaridade 0.0 (Vetores vazios após filtro)

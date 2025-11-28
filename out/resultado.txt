@@ -4,48 +4,74 @@ Total de pares comparados: 45
 Função hash utilizada: HASH_JAVA_DEFAULT
 Métrica de similaridade: Cosseno
 Pares com menor similaridade:
-documento_05.txt <-> documento_09.txt = 0.0000
+t1_base.txt <-> t2_plagio.txt = 0.0000
 
 Estatísticas de Rotação:
-  LL Rotations: 3
-  RR Rotations: 6
+  LL Rotations: 0
+  RR Rotations: 1
   LR Rotations: 0
-  RL Rotations: 4
-  Total Rotations: 13
+  RL Rotations: 1
+  Total Rotations: 2
 
-=== INÍCIO: TESTE 2: MODO TOP K (K=3) ===
+=== ESTATÍSTICAS DA TABELA HASH ===
+  Função Hash: HASH_JAVA_DEFAULT
+  Tamanho do Array (Buckets): 1024
+  Vocabulário Total (Elementos): 19
+  Buckets Ocupados: 19
+  Fator de Carga (Load Factor): 0.0186 (Elementos/Buckets Totais)
+  Comprimento Máximo da Cadeia (Pior Colisão): 1
+  Comprimento Médio da Cadeia (Média por Bucket Ocupado): 1.00
+
+=== INÍCIO: TESTE 9: MODO TOP K (Diretório de Borda - Top 3) ===
+COMANDO: java -cp . com.mackenzie.Main "files/documentos_teste" 0.0 topK 3
+DIRETÓRIO BASE: .
+STATUS SHELL: 0
 =================================
    VERIFICADOR DE SIMILARIDADE
 =================================
 
-(Tempo de construção da AVL: 0.0045 segundos)
+(Tempo de construção da AVL: 0.0035 segundos)
 === VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
 Total de documentos processados: 10
 Total de pares comparados: 45
 Função hash utilizada: HASH_JAVA_DEFAULT
 Métrica de similaridade: Cosseno
 Pares com menor similaridade:
-documento_05.txt <-> documento_09.txt = 0.0000
+t1_base.txt <-> t2_plagio.txt = 0.0000
 
 Estatísticas de Rotação:
-  LL Rotations: 3
-  RR Rotations: 6
+  LL Rotations: 0
+  RR Rotations: 1
   LR Rotations: 0
-  RL Rotations: 4
-  Total Rotations: 13
+  RL Rotations: 1
+  Total Rotations: 2
+
+=== ESTATÍSTICAS DA TABELA HASH ===
+  Função Hash: HASH_JAVA_DEFAULT
+  Tamanho do Array (Buckets): 1024
+  Vocabulário Total (Elementos): 19
+  Buckets Ocupados: 19
+  Fator de Carga (Load Factor): 0.0186 (Elementos/Buckets Totais)
+  Comprimento Máximo da Cadeia (Pior Colisão): 1
+  Comprimento Médio da Cadeia (Média por Bucket Ocupado): 1.00
 
 (Saída salva em: resultado.txt)
-=== FIM: TESTE 2: MODO TOP K (K=3) (Tempo: 89ms) ===
+=== FIM: TESTE 9: MODO TOP K (Diretório de Borda - Top 3) (Status: ✅ OK | Tempo: 83ms) ===
 
 
-=== INÍCIO: TESTE 3: MODO BUSCA (documento_01.txt vs documento_05.txt) ===
-=================================
-   VERIFICADOR DE SIMILARIDADE
-=================================
+========================================================
+        SUMÁRIO CONDENSADO DA EXECUÇÃO
+========================================================
+STATUS | TESTE | TEMPO
+--------------------------------------------------------
+✅ OK | TESTE 1: BORDA - Identidade (1.0) | 89ms
+✅ OK | TESTE 2: BORDA - Reordenamento (1.0) | 92ms
+✅ OK | TESTE 3: BORDA - Vocabulário Zero (0.0) | 90ms
+✅ OK | TESTE 4: BORDA - Plágio (Alta) | 89ms
+✅ OK | TESTE 5: BORDA - Tópico Diferente (Baixa) | 92ms
+✅ OK | TESTE 6: BORDA - Vazio vs. Normal (0.0) | 94ms
+✅ OK | TESTE 7: BORDA - Só Stop Words (0.0) | 96ms
+✅ OK | TESTE 8: MODO LISTA (Diretório de Borda) | 98ms
+✅ OK | TESTE 9: MODO TOP K (Diretório de Borda - Top 3) | 83ms
 
-(Tempo de construção da AVL: 0.0053 segundos)
-=== VERIFICADOR DE SIMILARIDADE DE TEXTOS ===
-Comparando: documento_01.txt <-> documento_05.txt
-Similaridade calculada: 0.20
-Métrica utilizada: Cosseno
-=== FIM: TESTE 3: MODO BUSCA (documento_01.txt vs documento_05.txt) (Tempo: 97ms) ===
+========================================================
